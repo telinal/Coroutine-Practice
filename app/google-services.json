@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "776341784038",
+    "project_id": "coroutine-practice",
+    "storage_bucket": "coroutine-practice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776341784038:android:a469b0b3e14e7258b38227",
+        "android_client_info": {
+          "package_name": "com.example.coroutinepractice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776341784038-hrnfj8d6jr01dinknsiveo1ua1b1lbat.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coroutinepractice",
+            "certificate_hash": "b73da647026b93abdbb5d214417c570e363dba88"
+          }
+        },
+        {
+          "client_id": "776341784038-dd1ajtmv912grldq8ts5af86bd1a9k8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHpoSq8ckzkjC5knFuOptHblTjydU1FhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776341784038-dd1ajtmv912grldq8ts5af86bd1a9k8i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

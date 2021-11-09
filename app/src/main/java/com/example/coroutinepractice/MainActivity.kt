@@ -1,5 +1,6 @@
 package com.example.coroutinepractice
 
+import android.app.Person
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,37 +8,58 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 import kotlin.concurrent.thread
 import kotlin.math.log
 import kotlin.system.measureTimeMillis
 
+data class Person(
+    val name: String = "",
+    val age: Int = -1
+)
+
 class MainActivity : AppCompatActivity() {
 
     val TAG = "TELINA"
+    lateinit var textid: TextView
 
     //    private lateinit var tvDummy: TextView
-    private lateinit var button: Button
+    // private lateinit var button: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        button = findViewById(R.id.btnStartActivity)
-        button.setOnClickListener {
-            lifecycleScope.launch {
-                while (true) {
-                    delay(1000)
-                    Log.d(TAG, "Still running")
-                }
-            }
-            GlobalScope.launch {
-                delay(5000)
-                Intent(this@MainActivity, SecondActivity::class.java).also { telina ->
-                    startActivity(telina)
-                    finish()
-                }
-
+        textid = findViewById(R.id.tvData)
+        val tutorialDocument = Firebase.firestore.collection("coroutines")
+            .document("tutorial")
+        val peter = Person("peter", 25)
+        GlobalScope.launch(Dispatchers.IO) {
+            tutorialDocument.set(peter).await()
+            val person = tutorialDocument.get().await().toObject(com.example.coroutinepractice.Person::class.java)
+            withContext(Dispatchers.Main) {
+                textid.text = person.toString()
             }
         }
+
+//        button = findViewById(R.id.btnStartActivity)
+//        button.setOnClickListener {
+//            lifecycleScope.launch {
+//                while (true) {
+//                    delay(1000)
+//                    Log.d(TAG, "Still running")
+//                }
+//            }
+//            GlobalScope.launch {
+//                delay(5000)
+//                Intent(this@MainActivity, SecondActivity::class.java).also { telina ->
+//                    startActivity(telina)
+//                    finish()
+//                }
+//
+//            }
+    }
 
 //        tvDummy = findViewById(R.id.tvDummy)
 
@@ -117,5 +139,5 @@ class MainActivity : AppCompatActivity() {
 //        delay(2000)
 //        return "answer2"
 //    }
-    }
+    //  }
 }
